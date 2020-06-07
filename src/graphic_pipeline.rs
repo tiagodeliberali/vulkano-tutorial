@@ -6,8 +6,8 @@ use vulkano::{
     format::Format,
     framebuffer::{Framebuffer, Subpass},
     image::{Dimensions, StorageImage},
+    pipeline::viewport::Viewport,
     pipeline::GraphicsPipeline,
-    pipeline::{viewport::Viewport},
     sync::GpuFuture,
 };
 
