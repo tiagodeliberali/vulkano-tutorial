@@ -12,7 +12,7 @@ use vulkano::{
     device::Device,
     framebuffer::{Framebuffer, FramebufferAbstract, RenderPassAbstract, Subpass},
     image::{ImageUsage, SwapchainImage},
-    instance::{Instance, PhysicalDevice},
+    instance::{ApplicationInfo, Instance, PhysicalDevice, Version},
     pipeline::viewport::Viewport,
     pipeline::GraphicsPipeline,
     swapchain::{
@@ -23,9 +23,24 @@ use vulkano::{
 };
 
 pub fn draw_triagle_on_screen() {
+    let app_info = ApplicationInfo {
+        application_name: Some("Hello Triangle".into()),
+        application_version: Some(Version {
+            major: 1,
+            minor: 0,
+            patch: 0,
+        }),
+        engine_name: Some("No Engine".into()),
+        engine_version: Some(Version {
+            major: 1,
+            minor: 0,
+            patch: 0,
+        }),
+    };
+
     let instance = {
         let extensions = vulkano_win::required_extensions();
-        Instance::new(None, &extensions, None).expect("failed to create instance")
+        Instance::new(Some(&app_info), &extensions, None).expect("failed to create instance")
     };
 
     let physical = PhysicalDevice::enumerate(&instance)
